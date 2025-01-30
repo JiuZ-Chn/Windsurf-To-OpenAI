@@ -45,6 +45,7 @@ app.post('/v1/chat/completions', async (req, res) => {
     const jwtResMessage = $root.JwtResMessage.decode(Buffer.from(jwtBuffer))
     const jwtToken = jwtResMessage.jwt
 
+    // Get chat message
     const chatBody = generateChatBody(userId, jwtToken, req.body);
     const response = await fetch('https://server.codeium.com/exa.api_server_pb.ApiServerService/GetChatMessage', {
       method: 'POST',
