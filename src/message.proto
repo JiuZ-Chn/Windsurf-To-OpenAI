@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+message ChatMessage {
+
+  message Metadata {
+    string name = 1;
+    string codeiumVersion = 2;
+    string userId = 3;
+    string lang = 4;
+    string os = 5;
+    string windsurfVersion = 7;
+    string hardwareInfo = 8;
+    string windsurfName = 12;
+    string token = 21;
+  }
+
+  message UserMessage {
+
+    message Unknown8 {
+      uint32 value = 1; // 1
+    }
+
+    uint32 role = 2; // user: 1, bot: 2
+    string content = 3;
+    uint32 token = 4;
+    uint32 unknown5 = 5;
+    Unknown8 unknown8 = 8;
+  }
+
+  message Configuration {
+    uint32 unknown1 = 1; // always 1
+    uint32 maxTokens = 2; // 8192
+    uint32 topK = 3; // 200
+    double frequencyPenalty = 5; // 0.4, Not sure
+    double temperature = 6; // 0.4, Not sure
+    uint32 unknown7 = 7; // 25 
+    double topP = 8; // Validated. Value must be greater than 0 and less than or equal to 1
+    repeated string stop = 9;
+    double presencePenalty = 11; // Not sure
+  }
+
+  message Tool {
+    string name = 1;
+    string desc = 2;
+    string schema = 3;
+  }
+
+  message ToolChoice {
+    string value = 1; // "none" for legacy chat mode
+  }
+
+  message Unknown13 {
+    uint32 value = 1; // always 1
+  }
+  
+  message Unknown15 {
+    string uuid = 1; // A uuid, always same in one conversation
+    uint32 value = 2; // The length of user message.
+  }
+
+  Metadata metadata = 1;
+  string instructions = 2;
+  repeated UserMessage messages = 3;
+  uint32 model = 6; // 109: gpt4o 166:claude3.5sonnet
+  uint32 unknown7 = 7; // always 5
+  Configuration configruation = 8;
+  //repeated Tool tools = 10;
+  ToolChoice toolChoice = 12; // "none"
+  Unknown13 unknown13 = 13;
+  Unknown15 unknown15 = 15;
+  string conversationId = 16; // A uuid, always same in one conversation, not equal to the one in field 15.
+}
+
+message ResMessage {
+
+  message Timestamp {
+    uint32 timestamp = 1;
+    uint32 value2 = 2;
+  }
+
+  string botId = 1;
+  Timestamp timestamp = 2;
+  string message = 3;
+  uint32 unknown4 = 4;
+}
+
+message JwtMessage {
+
+  message Jwt{
+    string name = 1;  
+    string codeiumVersion = 2;
+    string userId = 3;
+    string lang = 4;
+    string windsurfVersion = 7;
+    uint32 unknown9 = 9; 
+    string unknown10 = 10;  // uuid
+    string extentionName = 12;
+    string extentionPath = 17;
+    string extentionVersion = 23; 
+    string unknown24 = 24; // 256 bit
+  }
+
+  Jwt jwt = 1;
+}
+
+message JwtResMessage{
+
+  string jwt = 1;
+}
