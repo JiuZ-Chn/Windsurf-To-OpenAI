@@ -149,11 +149,17 @@ async function chunkToUtf8String(chunk) {
     }
 
   } catch (err) {
-    //console.log(err)
-    return zlib.gunzipSync(chunk.subarray(5)).toString('utf-8')
+    try {
+      if (results.length == 0) {
+        const message = zlib.gunzipSync(chunk.subarray(5)).toString('utf-8')
+        results.push(message)
+      }  
+    } catch(err){
+      //
+    }
   }
 
-  return results
+  return results.join('')
 }
 
 module.exports = {
