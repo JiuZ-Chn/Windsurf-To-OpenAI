@@ -111,13 +111,13 @@ function generateChatBody(userId, jwtToken, body) {
   const buffer = $root.ChatMessage.encode(bodyInstance).finish();
   const gzipBuffer = zlib.gzipSync(buffer)
 
-  const hexString = (
-    "01"
-    + gzipBuffer.length.toString(16).padStart(8, "0")
-    + gzipBuffer.toString('hex')
-  ).toUpperCase();
+  const finalBody = Buffer.concat([
+    Buffer.from([0x01]),
+    Buffer.from(gzipBuffer.length.toString(16).padStart(8, '0'), 'hex'),
+    gzipBuffer
+  ])
 
-  return Buffer.from(hexString, 'hex');
+  return finalBody
 }
 
 async function chunkToUtf8String(chunk) {
