@@ -78,7 +78,7 @@ function generateChatBody(userId, jwtToken, body) {
       unknown1: 1, 
       maxTokens: Math.min(body.max_tokens?? 8192, 8192), // Value must be not greater than 8192
       topK: 200,
-      topP: body.top_p?? 0.4,
+      topP: Math.max(body.top_p?? 0.4, 0.01), // Value must be greater than 0
       temperature: body.temperature?? 0.4,
       unknown7: 50,
       presencePenalty: body.presence_penalty?? 1.0,
