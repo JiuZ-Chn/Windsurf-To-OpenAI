@@ -27,16 +27,16 @@ message ChatMessage {
     Unknown8 unknown8 = 8;
   }
 
-  message GenerartionParameter {
+  message Configuration {
     uint32 unknown1 = 1; // always 1
     uint32 maxTokens = 2; // 8192
     uint32 topK = 3; // 200
-    double topP = 5; // 0.4, Not sure
+    double frequencyPenalty = 5; // 0.4, Not sure
     double temperature = 6; // 0.4, Not sure
     uint32 unknown7 = 7; // 25 
-    double presencePenalty = 8; // 1, Not sure 
+    double topP = 8; // Validated. Value must be greater than 0 and less than or equal to 1
     repeated string stop = 9;
-    double frequencyPenalty = 11; // 1, Not sure
+    double presencePenalty = 11; // Not sure
   }
 
   message Tool {
@@ -63,7 +63,7 @@ message ChatMessage {
   repeated UserMessage messages = 3;
   uint32 model = 6; // 109: gpt4o 166:claude3.5sonnet
   uint32 unknown7 = 7; // always 5
-  GenerartionParameter parameter = 8;
+  Configuration configruation = 8;
   //repeated Tool tools = 10;
   ToolChoice toolChoice = 12; // "none"
   Unknown13 unknown13 = 13;

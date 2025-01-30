@@ -20,7 +20,7 @@ $root.ChatMessage = (function() {
      * @property {Array.<ChatMessage.IUserMessage>|null} [messages] ChatMessage messages
      * @property {number|null} [model] ChatMessage model
      * @property {number|null} [unknown7] ChatMessage unknown7
-     * @property {ChatMessage.IGenerartionParameter|null} [parameter] ChatMessage parameter
+     * @property {ChatMessage.IConfiguration|null} [configruation] ChatMessage configruation
      * @property {ChatMessage.IToolChoice|null} [toolChoice] ChatMessage toolChoice
      * @property {ChatMessage.IUnknown13|null} [unknown13] ChatMessage unknown13
      * @property {ChatMessage.IUnknown15|null} [unknown15] ChatMessage unknown15
@@ -84,12 +84,12 @@ $root.ChatMessage = (function() {
     ChatMessage.prototype.unknown7 = 0;
 
     /**
-     * ChatMessage parameter.
-     * @member {ChatMessage.IGenerartionParameter|null|undefined} parameter
+     * ChatMessage configruation.
+     * @member {ChatMessage.IConfiguration|null|undefined} configruation
      * @memberof ChatMessage
      * @instance
      */
-    ChatMessage.prototype.parameter = null;
+    ChatMessage.prototype.configruation = null;
 
     /**
      * ChatMessage toolChoice.
@@ -158,8 +158,8 @@ $root.ChatMessage = (function() {
             writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.model);
         if (message.unknown7 != null && Object.hasOwnProperty.call(message, "unknown7"))
             writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.unknown7);
-        if (message.parameter != null && Object.hasOwnProperty.call(message, "parameter"))
-            $root.ChatMessage.GenerartionParameter.encode(message.parameter, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+        if (message.configruation != null && Object.hasOwnProperty.call(message, "configruation"))
+            $root.ChatMessage.Configuration.encode(message.configruation, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
         if (message.toolChoice != null && Object.hasOwnProperty.call(message, "toolChoice"))
             $root.ChatMessage.ToolChoice.encode(message.toolChoice, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
         if (message.unknown13 != null && Object.hasOwnProperty.call(message, "unknown13"))
@@ -225,7 +225,7 @@ $root.ChatMessage = (function() {
                     break;
                 }
             case 8: {
-                    message.parameter = $root.ChatMessage.GenerartionParameter.decode(reader, reader.uint32());
+                    message.configruation = $root.ChatMessage.Configuration.decode(reader, reader.uint32());
                     break;
                 }
             case 12: {
@@ -302,10 +302,10 @@ $root.ChatMessage = (function() {
         if (message.unknown7 != null && message.hasOwnProperty("unknown7"))
             if (!$util.isInteger(message.unknown7))
                 return "unknown7: integer expected";
-        if (message.parameter != null && message.hasOwnProperty("parameter")) {
-            var error = $root.ChatMessage.GenerartionParameter.verify(message.parameter);
+        if (message.configruation != null && message.hasOwnProperty("configruation")) {
+            var error = $root.ChatMessage.Configuration.verify(message.configruation);
             if (error)
-                return "parameter." + error;
+                return "configruation." + error;
         }
         if (message.toolChoice != null && message.hasOwnProperty("toolChoice")) {
             var error = $root.ChatMessage.ToolChoice.verify(message.toolChoice);
@@ -361,10 +361,10 @@ $root.ChatMessage = (function() {
             message.model = object.model >>> 0;
         if (object.unknown7 != null)
             message.unknown7 = object.unknown7 >>> 0;
-        if (object.parameter != null) {
-            if (typeof object.parameter !== "object")
-                throw TypeError(".ChatMessage.parameter: object expected");
-            message.parameter = $root.ChatMessage.GenerartionParameter.fromObject(object.parameter);
+        if (object.configruation != null) {
+            if (typeof object.configruation !== "object")
+                throw TypeError(".ChatMessage.configruation: object expected");
+            message.configruation = $root.ChatMessage.Configuration.fromObject(object.configruation);
         }
         if (object.toolChoice != null) {
             if (typeof object.toolChoice !== "object")
@@ -406,7 +406,7 @@ $root.ChatMessage = (function() {
             object.instructions = "";
             object.model = 0;
             object.unknown7 = 0;
-            object.parameter = null;
+            object.configruation = null;
             object.toolChoice = null;
             object.unknown13 = null;
             object.unknown15 = null;
@@ -425,8 +425,8 @@ $root.ChatMessage = (function() {
             object.model = message.model;
         if (message.unknown7 != null && message.hasOwnProperty("unknown7"))
             object.unknown7 = message.unknown7;
-        if (message.parameter != null && message.hasOwnProperty("parameter"))
-            object.parameter = $root.ChatMessage.GenerartionParameter.toObject(message.parameter, options);
+        if (message.configruation != null && message.hasOwnProperty("configruation"))
+            object.configruation = $root.ChatMessage.Configuration.toObject(message.configruation, options);
         if (message.toolChoice != null && message.hasOwnProperty("toolChoice"))
             object.toolChoice = $root.ChatMessage.ToolChoice.toObject(message.toolChoice, options);
         if (message.unknown13 != null && message.hasOwnProperty("unknown13"))
@@ -1356,32 +1356,32 @@ $root.ChatMessage = (function() {
         return UserMessage;
     })();
 
-    ChatMessage.GenerartionParameter = (function() {
+    ChatMessage.Configuration = (function() {
 
         /**
-         * Properties of a GenerartionParameter.
+         * Properties of a Configuration.
          * @memberof ChatMessage
-         * @interface IGenerartionParameter
-         * @property {number|null} [unknown1] GenerartionParameter unknown1
-         * @property {number|null} [maxTokens] GenerartionParameter maxTokens
-         * @property {number|null} [topK] GenerartionParameter topK
-         * @property {number|null} [topP] GenerartionParameter topP
-         * @property {number|null} [temperature] GenerartionParameter temperature
-         * @property {number|null} [unknown7] GenerartionParameter unknown7
-         * @property {number|null} [presencePenalty] GenerartionParameter presencePenalty
-         * @property {Array.<string>|null} [stop] GenerartionParameter stop
-         * @property {number|null} [frequencyPenalty] GenerartionParameter frequencyPenalty
+         * @interface IConfiguration
+         * @property {number|null} [unknown1] Configuration unknown1
+         * @property {number|null} [maxTokens] Configuration maxTokens
+         * @property {number|null} [topK] Configuration topK
+         * @property {number|null} [frequencyPenalty] Configuration frequencyPenalty
+         * @property {number|null} [temperature] Configuration temperature
+         * @property {number|null} [unknown7] Configuration unknown7
+         * @property {number|null} [topP] Configuration topP
+         * @property {Array.<string>|null} [stop] Configuration stop
+         * @property {number|null} [presencePenalty] Configuration presencePenalty
          */
 
         /**
-         * Constructs a new GenerartionParameter.
+         * Constructs a new Configuration.
          * @memberof ChatMessage
-         * @classdesc Represents a GenerartionParameter.
-         * @implements IGenerartionParameter
+         * @classdesc Represents a Configuration.
+         * @implements IConfiguration
          * @constructor
-         * @param {ChatMessage.IGenerartionParameter=} [properties] Properties to set
+         * @param {ChatMessage.IConfiguration=} [properties] Properties to set
          */
-        function GenerartionParameter(properties) {
+        function Configuration(properties) {
             this.stop = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1390,99 +1390,99 @@ $root.ChatMessage = (function() {
         }
 
         /**
-         * GenerartionParameter unknown1.
+         * Configuration unknown1.
          * @member {number} unknown1
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @instance
          */
-        GenerartionParameter.prototype.unknown1 = 0;
+        Configuration.prototype.unknown1 = 0;
 
         /**
-         * GenerartionParameter maxTokens.
+         * Configuration maxTokens.
          * @member {number} maxTokens
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @instance
          */
-        GenerartionParameter.prototype.maxTokens = 0;
+        Configuration.prototype.maxTokens = 0;
 
         /**
-         * GenerartionParameter topK.
+         * Configuration topK.
          * @member {number} topK
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @instance
          */
-        GenerartionParameter.prototype.topK = 0;
+        Configuration.prototype.topK = 0;
 
         /**
-         * GenerartionParameter topP.
-         * @member {number} topP
-         * @memberof ChatMessage.GenerartionParameter
-         * @instance
-         */
-        GenerartionParameter.prototype.topP = 0;
-
-        /**
-         * GenerartionParameter temperature.
-         * @member {number} temperature
-         * @memberof ChatMessage.GenerartionParameter
-         * @instance
-         */
-        GenerartionParameter.prototype.temperature = 0;
-
-        /**
-         * GenerartionParameter unknown7.
-         * @member {number} unknown7
-         * @memberof ChatMessage.GenerartionParameter
-         * @instance
-         */
-        GenerartionParameter.prototype.unknown7 = 0;
-
-        /**
-         * GenerartionParameter presencePenalty.
-         * @member {number} presencePenalty
-         * @memberof ChatMessage.GenerartionParameter
-         * @instance
-         */
-        GenerartionParameter.prototype.presencePenalty = 0;
-
-        /**
-         * GenerartionParameter stop.
-         * @member {Array.<string>} stop
-         * @memberof ChatMessage.GenerartionParameter
-         * @instance
-         */
-        GenerartionParameter.prototype.stop = $util.emptyArray;
-
-        /**
-         * GenerartionParameter frequencyPenalty.
+         * Configuration frequencyPenalty.
          * @member {number} frequencyPenalty
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @instance
          */
-        GenerartionParameter.prototype.frequencyPenalty = 0;
+        Configuration.prototype.frequencyPenalty = 0;
 
         /**
-         * Creates a new GenerartionParameter instance using the specified properties.
-         * @function create
-         * @memberof ChatMessage.GenerartionParameter
-         * @static
-         * @param {ChatMessage.IGenerartionParameter=} [properties] Properties to set
-         * @returns {ChatMessage.GenerartionParameter} GenerartionParameter instance
+         * Configuration temperature.
+         * @member {number} temperature
+         * @memberof ChatMessage.Configuration
+         * @instance
          */
-        GenerartionParameter.create = function create(properties) {
-            return new GenerartionParameter(properties);
+        Configuration.prototype.temperature = 0;
+
+        /**
+         * Configuration unknown7.
+         * @member {number} unknown7
+         * @memberof ChatMessage.Configuration
+         * @instance
+         */
+        Configuration.prototype.unknown7 = 0;
+
+        /**
+         * Configuration topP.
+         * @member {number} topP
+         * @memberof ChatMessage.Configuration
+         * @instance
+         */
+        Configuration.prototype.topP = 0;
+
+        /**
+         * Configuration stop.
+         * @member {Array.<string>} stop
+         * @memberof ChatMessage.Configuration
+         * @instance
+         */
+        Configuration.prototype.stop = $util.emptyArray;
+
+        /**
+         * Configuration presencePenalty.
+         * @member {number} presencePenalty
+         * @memberof ChatMessage.Configuration
+         * @instance
+         */
+        Configuration.prototype.presencePenalty = 0;
+
+        /**
+         * Creates a new Configuration instance using the specified properties.
+         * @function create
+         * @memberof ChatMessage.Configuration
+         * @static
+         * @param {ChatMessage.IConfiguration=} [properties] Properties to set
+         * @returns {ChatMessage.Configuration} Configuration instance
+         */
+        Configuration.create = function create(properties) {
+            return new Configuration(properties);
         };
 
         /**
-         * Encodes the specified GenerartionParameter message. Does not implicitly {@link ChatMessage.GenerartionParameter.verify|verify} messages.
+         * Encodes the specified Configuration message. Does not implicitly {@link ChatMessage.Configuration.verify|verify} messages.
          * @function encode
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
-         * @param {ChatMessage.IGenerartionParameter} message GenerartionParameter message or plain object to encode
+         * @param {ChatMessage.IConfiguration} message Configuration message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GenerartionParameter.encode = function encode(message, writer) {
+        Configuration.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.unknown1 != null && Object.hasOwnProperty.call(message, "unknown1"))
@@ -1491,50 +1491,50 @@ $root.ChatMessage = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.maxTokens);
             if (message.topK != null && Object.hasOwnProperty.call(message, "topK"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.topK);
-            if (message.topP != null && Object.hasOwnProperty.call(message, "topP"))
-                writer.uint32(/* id 5, wireType 1 =*/41).double(message.topP);
+            if (message.frequencyPenalty != null && Object.hasOwnProperty.call(message, "frequencyPenalty"))
+                writer.uint32(/* id 5, wireType 1 =*/41).double(message.frequencyPenalty);
             if (message.temperature != null && Object.hasOwnProperty.call(message, "temperature"))
                 writer.uint32(/* id 6, wireType 1 =*/49).double(message.temperature);
             if (message.unknown7 != null && Object.hasOwnProperty.call(message, "unknown7"))
                 writer.uint32(/* id 7, wireType 0 =*/56).uint32(message.unknown7);
-            if (message.presencePenalty != null && Object.hasOwnProperty.call(message, "presencePenalty"))
-                writer.uint32(/* id 8, wireType 1 =*/65).double(message.presencePenalty);
+            if (message.topP != null && Object.hasOwnProperty.call(message, "topP"))
+                writer.uint32(/* id 8, wireType 1 =*/65).double(message.topP);
             if (message.stop != null && message.stop.length)
                 for (var i = 0; i < message.stop.length; ++i)
                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.stop[i]);
-            if (message.frequencyPenalty != null && Object.hasOwnProperty.call(message, "frequencyPenalty"))
-                writer.uint32(/* id 11, wireType 1 =*/89).double(message.frequencyPenalty);
+            if (message.presencePenalty != null && Object.hasOwnProperty.call(message, "presencePenalty"))
+                writer.uint32(/* id 11, wireType 1 =*/89).double(message.presencePenalty);
             return writer;
         };
 
         /**
-         * Encodes the specified GenerartionParameter message, length delimited. Does not implicitly {@link ChatMessage.GenerartionParameter.verify|verify} messages.
+         * Encodes the specified Configuration message, length delimited. Does not implicitly {@link ChatMessage.Configuration.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
-         * @param {ChatMessage.IGenerartionParameter} message GenerartionParameter message or plain object to encode
+         * @param {ChatMessage.IConfiguration} message Configuration message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GenerartionParameter.encodeDelimited = function encodeDelimited(message, writer) {
+        Configuration.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a GenerartionParameter message from the specified reader or buffer.
+         * Decodes a Configuration message from the specified reader or buffer.
          * @function decode
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {ChatMessage.GenerartionParameter} GenerartionParameter
+         * @returns {ChatMessage.Configuration} Configuration
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GenerartionParameter.decode = function decode(reader, length) {
+        Configuration.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatMessage.GenerartionParameter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatMessage.Configuration();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1551,7 +1551,7 @@ $root.ChatMessage = (function() {
                         break;
                     }
                 case 5: {
-                        message.topP = reader.double();
+                        message.frequencyPenalty = reader.double();
                         break;
                     }
                 case 6: {
@@ -1563,7 +1563,7 @@ $root.ChatMessage = (function() {
                         break;
                     }
                 case 8: {
-                        message.presencePenalty = reader.double();
+                        message.topP = reader.double();
                         break;
                     }
                 case 9: {
@@ -1573,7 +1573,7 @@ $root.ChatMessage = (function() {
                         break;
                     }
                 case 11: {
-                        message.frequencyPenalty = reader.double();
+                        message.presencePenalty = reader.double();
                         break;
                     }
                 default:
@@ -1585,30 +1585,30 @@ $root.ChatMessage = (function() {
         };
 
         /**
-         * Decodes a GenerartionParameter message from the specified reader or buffer, length delimited.
+         * Decodes a Configuration message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {ChatMessage.GenerartionParameter} GenerartionParameter
+         * @returns {ChatMessage.Configuration} Configuration
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GenerartionParameter.decodeDelimited = function decodeDelimited(reader) {
+        Configuration.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a GenerartionParameter message.
+         * Verifies a Configuration message.
          * @function verify
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        GenerartionParameter.verify = function verify(message) {
+        Configuration.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.unknown1 != null && message.hasOwnProperty("unknown1"))
@@ -1620,18 +1620,18 @@ $root.ChatMessage = (function() {
             if (message.topK != null && message.hasOwnProperty("topK"))
                 if (!$util.isInteger(message.topK))
                     return "topK: integer expected";
-            if (message.topP != null && message.hasOwnProperty("topP"))
-                if (typeof message.topP !== "number")
-                    return "topP: number expected";
+            if (message.frequencyPenalty != null && message.hasOwnProperty("frequencyPenalty"))
+                if (typeof message.frequencyPenalty !== "number")
+                    return "frequencyPenalty: number expected";
             if (message.temperature != null && message.hasOwnProperty("temperature"))
                 if (typeof message.temperature !== "number")
                     return "temperature: number expected";
             if (message.unknown7 != null && message.hasOwnProperty("unknown7"))
                 if (!$util.isInteger(message.unknown7))
                     return "unknown7: integer expected";
-            if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty"))
-                if (typeof message.presencePenalty !== "number")
-                    return "presencePenalty: number expected";
+            if (message.topP != null && message.hasOwnProperty("topP"))
+                if (typeof message.topP !== "number")
+                    return "topP: number expected";
             if (message.stop != null && message.hasOwnProperty("stop")) {
                 if (!Array.isArray(message.stop))
                     return "stop: array expected";
@@ -1639,60 +1639,60 @@ $root.ChatMessage = (function() {
                     if (!$util.isString(message.stop[i]))
                         return "stop: string[] expected";
             }
-            if (message.frequencyPenalty != null && message.hasOwnProperty("frequencyPenalty"))
-                if (typeof message.frequencyPenalty !== "number")
-                    return "frequencyPenalty: number expected";
+            if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty"))
+                if (typeof message.presencePenalty !== "number")
+                    return "presencePenalty: number expected";
             return null;
         };
 
         /**
-         * Creates a GenerartionParameter message from a plain object. Also converts values to their respective internal types.
+         * Creates a Configuration message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {ChatMessage.GenerartionParameter} GenerartionParameter
+         * @returns {ChatMessage.Configuration} Configuration
          */
-        GenerartionParameter.fromObject = function fromObject(object) {
-            if (object instanceof $root.ChatMessage.GenerartionParameter)
+        Configuration.fromObject = function fromObject(object) {
+            if (object instanceof $root.ChatMessage.Configuration)
                 return object;
-            var message = new $root.ChatMessage.GenerartionParameter();
+            var message = new $root.ChatMessage.Configuration();
             if (object.unknown1 != null)
                 message.unknown1 = object.unknown1 >>> 0;
             if (object.maxTokens != null)
                 message.maxTokens = object.maxTokens >>> 0;
             if (object.topK != null)
                 message.topK = object.topK >>> 0;
-            if (object.topP != null)
-                message.topP = Number(object.topP);
+            if (object.frequencyPenalty != null)
+                message.frequencyPenalty = Number(object.frequencyPenalty);
             if (object.temperature != null)
                 message.temperature = Number(object.temperature);
             if (object.unknown7 != null)
                 message.unknown7 = object.unknown7 >>> 0;
-            if (object.presencePenalty != null)
-                message.presencePenalty = Number(object.presencePenalty);
+            if (object.topP != null)
+                message.topP = Number(object.topP);
             if (object.stop) {
                 if (!Array.isArray(object.stop))
-                    throw TypeError(".ChatMessage.GenerartionParameter.stop: array expected");
+                    throw TypeError(".ChatMessage.Configuration.stop: array expected");
                 message.stop = [];
                 for (var i = 0; i < object.stop.length; ++i)
                     message.stop[i] = String(object.stop[i]);
             }
-            if (object.frequencyPenalty != null)
-                message.frequencyPenalty = Number(object.frequencyPenalty);
+            if (object.presencePenalty != null)
+                message.presencePenalty = Number(object.presencePenalty);
             return message;
         };
 
         /**
-         * Creates a plain object from a GenerartionParameter message. Also converts values to other types if specified.
+         * Creates a plain object from a Configuration message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
-         * @param {ChatMessage.GenerartionParameter} message GenerartionParameter
+         * @param {ChatMessage.Configuration} message Configuration
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        GenerartionParameter.toObject = function toObject(message, options) {
+        Configuration.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1702,11 +1702,11 @@ $root.ChatMessage = (function() {
                 object.unknown1 = 0;
                 object.maxTokens = 0;
                 object.topK = 0;
-                object.topP = 0;
+                object.frequencyPenalty = 0;
                 object.temperature = 0;
                 object.unknown7 = 0;
+                object.topP = 0;
                 object.presencePenalty = 0;
-                object.frequencyPenalty = 0;
             }
             if (message.unknown1 != null && message.hasOwnProperty("unknown1"))
                 object.unknown1 = message.unknown1;
@@ -1714,51 +1714,51 @@ $root.ChatMessage = (function() {
                 object.maxTokens = message.maxTokens;
             if (message.topK != null && message.hasOwnProperty("topK"))
                 object.topK = message.topK;
-            if (message.topP != null && message.hasOwnProperty("topP"))
-                object.topP = options.json && !isFinite(message.topP) ? String(message.topP) : message.topP;
+            if (message.frequencyPenalty != null && message.hasOwnProperty("frequencyPenalty"))
+                object.frequencyPenalty = options.json && !isFinite(message.frequencyPenalty) ? String(message.frequencyPenalty) : message.frequencyPenalty;
             if (message.temperature != null && message.hasOwnProperty("temperature"))
                 object.temperature = options.json && !isFinite(message.temperature) ? String(message.temperature) : message.temperature;
             if (message.unknown7 != null && message.hasOwnProperty("unknown7"))
                 object.unknown7 = message.unknown7;
-            if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty"))
-                object.presencePenalty = options.json && !isFinite(message.presencePenalty) ? String(message.presencePenalty) : message.presencePenalty;
+            if (message.topP != null && message.hasOwnProperty("topP"))
+                object.topP = options.json && !isFinite(message.topP) ? String(message.topP) : message.topP;
             if (message.stop && message.stop.length) {
                 object.stop = [];
                 for (var j = 0; j < message.stop.length; ++j)
                     object.stop[j] = message.stop[j];
             }
-            if (message.frequencyPenalty != null && message.hasOwnProperty("frequencyPenalty"))
-                object.frequencyPenalty = options.json && !isFinite(message.frequencyPenalty) ? String(message.frequencyPenalty) : message.frequencyPenalty;
+            if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty"))
+                object.presencePenalty = options.json && !isFinite(message.presencePenalty) ? String(message.presencePenalty) : message.presencePenalty;
             return object;
         };
 
         /**
-         * Converts this GenerartionParameter to JSON.
+         * Converts this Configuration to JSON.
          * @function toJSON
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        GenerartionParameter.prototype.toJSON = function toJSON() {
+        Configuration.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
         /**
-         * Gets the default type url for GenerartionParameter
+         * Gets the default type url for Configuration
          * @function getTypeUrl
-         * @memberof ChatMessage.GenerartionParameter
+         * @memberof ChatMessage.Configuration
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        GenerartionParameter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        Configuration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/ChatMessage.GenerartionParameter";
+            return typeUrlPrefix + "/ChatMessage.Configuration";
         };
 
-        return GenerartionParameter;
+        return Configuration;
     })();
 
     ChatMessage.Tool = (function() {

@@ -74,9 +74,9 @@ function generateChatBody(userId, jwtToken, body) {
     messages: formattedMessages,
     model: modelNumber[body.modelName]?? modelNumber['claude-3-5-sonnet'],
     unknown7: 5,
-    parameter: {
+    configuration: {
       unknown1: 1, 
-      maxTokens: body.max_tokens?? 8192,
+      maxTokens: Math.min(body.max_tokens?? 8192, 8192), // Value must be not greater than 8192
       topK: 200,
       topP: body.top_p?? 0.4,
       temperature: body.temperature?? 0.4,
@@ -125,11 +125,13 @@ async function chunkToUtf8String(chunk) {
 
   try {
     const buffer = Buffer.from(chunk, 'hex');
+    //console.log("Buffer: ", buffer.toString('hex'))
 
     for(let i = 0; i < buffer.length; i++){
       const magicNumber = parseInt(buffer.subarray(i, i + 1).toString('hex'), 16)
       const dataLength = parseInt(buffer.subarray(i + 1, i + 5).toString('hex'), 16)
       const data = buffer.subarray(i + 5, i + 5 + dataLength)
+      //console.log("Data: ", data.toString('hex'))
       const gunzipData = zlib.gunzipSync(data)
       if(magicNumber == 1) {
         const resMessage = $root.ResMessage.decode(gunzipData);
@@ -141,7 +143,8 @@ async function chunkToUtf8String(chunk) {
         //console.log(message)
       }
 
-      i += 5 + dataLength
+      // i will +1 in next loop. So -1 here.
+      i += 5 + dataLength - 1
     }
 
   } catch (err) {
