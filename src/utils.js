@@ -132,13 +132,14 @@ async function chunkToUtf8String(chunk) {
       const dataLength = parseInt(buffer.subarray(i + 1, i + 5).toString('hex'), 16)
       const data = buffer.subarray(i + 5, i + 5 + dataLength)
       //console.log("Data: ", data.toString('hex'))
-      const gunzipData = zlib.gunzipSync(data)
-      if(magicNumber == 1) {
+      if (magicNumber == 1) {
+        const gunzipData = zlib.gunzipSync(data)
         const resMessage = $root.ResMessage.decode(gunzipData);
         const message = resMessage.message
         results.push(message)
       }  
-      else { // magicNumber ==3
+      else if (magicNumber == 3)
+        const gunzipData = zlib.gunzipSync(data)
         const message = gunzipData.toString('utf-8')
         //console.log(message)
       }
@@ -148,11 +149,17 @@ async function chunkToUtf8String(chunk) {
     }
 
   } catch (err) {
-    //console.log(err)
-    return zlib.gunzipSync(chunk.subarray(5)).toString('utf-8')
+    try {
+      if (results.length == 0) {
+        const message = zlib.gunzipSync(chunk.subarray(5)).toString('utf-8')
+        results.push(message)
+      }  
+    } catch(err){
+      //
+    }
   }
 
-  return results
+  return results.join('')
 }
 
 module.exports = {
